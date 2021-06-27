@@ -12,6 +12,7 @@ namespace DotNetCheck.AndroidSdk
 		static string[] KnownLikelyPaths =>
 			RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
 				new string[] {
+					Environment.GetEnvironmentVariable("ANDROID_HOME"),
 					Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Android", "android-sdk"),
 					Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Android", "android-sdk"),
 				} :

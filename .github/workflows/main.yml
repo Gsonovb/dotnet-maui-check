@@ -144,31 +144,31 @@ jobs:
 #             maui-check --main --ci --fix --non-interactive --verbose --skip xcode --skip androidemulator --skip vswin --skip vsmac
 #             maui-check --ci --fix --non-interactive --verbose --skip openjdk --skip xcode --skip androidemulator --skip vswin --skip vsmac
 
-    publish:
-      name: Publish
-      needs:
-        - build
-#         - testmac
-#         - testwin
-      runs-on: windows-latest
-      steps:
-        - name: Download Artifacts
-          uses: actions/download-artifact@v1
-          with:
-            name: NuGet
-        - name: Setup .NET Core
-          uses: actions/setup-dotnet@v1
-          with:
-            dotnet-version: 3.1.100
-        - name: Setup NuGet
-          uses: nuget/setup-nuget@v1
-          with:
-            nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-            nuget-version: 'latest'
-        - name: Push NuGet
-          if: github.event_name == 'release'
-          run: |
-            nuget push NuGet\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_ORG_API_KEY }} -SkipDuplicate
+#     publish:
+#       name: Publish
+#       needs:
+#         - build
+# #         - testmac
+# #         - testwin
+#       runs-on: windows-latest
+#       steps:
+#         - name: Download Artifacts
+#           uses: actions/download-artifact@v1
+#           with:
+#             name: NuGet
+#         - name: Setup .NET Core
+#           uses: actions/setup-dotnet@v1
+#           with:
+#             dotnet-version: 3.1.100
+#         - name: Setup NuGet
+#           uses: nuget/setup-nuget@v1
+#           with:
+#             nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+#             nuget-version: 'latest'
+#         - name: Push NuGet
+#           if: github.event_name == 'release'
+#           run: |
+#             nuget push NuGet\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_ORG_API_KEY }} -SkipDuplicate
         #- name: Push GPR
         #  if: github.event_name != 'release'
         #  run: |
